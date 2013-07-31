@@ -18,6 +18,15 @@ struct fu_inode {
   uint32_t di_cluster;
   uint8_t si_index;
   uint8_t di_index;
+};
+
+struct fu_si_block {
+  uint32_t directs[32];
+};
+
+struct fu_di_block {
+  uint32_t clusters[25];
+  uint8_t indices[25];
 }
 
 struct fu_super_block {
