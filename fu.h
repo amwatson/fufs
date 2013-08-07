@@ -49,5 +49,25 @@ struct fu_super_block {
     uint_16_t s_inode_size; // Size of on-disk inode structure
     uint_16_t s_block_cluster_nr; // Block cluster number of this superblock
     uint_16_t s_padding1; // Alignment to word
-    uint_32_t s_reserved [204]; // Nulls to pad out 1,024 bytes
+    uint_8_t s_reserved [47]; // Nulls to pad out 128 bytes
+}
+
+// a linked-list containing free inodes
+struct fu_free_inode {
+    uint_32_t prev; // pointer to previous cluster
+    uint_32_t next; // pointer to next cluster
+    uint_8_t prev_ind; // index into previous cluster
+    uint_8_t next_ind; // index into next cluster
+    uint_8_t padding [118]; // pads out to 128 bytes
+}
+
+struct fu_dir_entry {
+    char name [64]; // name of entry
+    struct fu_inode *inode;     
+}
+
+// sizeof() doesn't work on struct
+struct fu_dir {
+    int length;
+    struct fu_dir_entry *file_list; // list of files in directory
 }
