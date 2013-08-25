@@ -1,4 +1,6 @@
 #include "fu.h"
+#include <stdint.h>
+#include <stdio.h>
 
 /* device file, length, length is multiple of 4k, divide by that to get blocks,
        make struct 
